@@ -9,9 +9,11 @@ class CartsController < ApplicationController
 
   def show
     @items = @cart.retrieve_items
+    #love this!
   end
 
   def destroy
+    # I don't love the distructive nature of this action
     @item = Item.find(params[:item_id])
     @cart.remove_item(params[:item_id])
     flash[:success] = "Successfully removed <a href=#{item_path(@item)}>#{@item.title}</a> from your cart."
@@ -20,6 +22,7 @@ class CartsController < ApplicationController
 
   def update
     case
+      #we need to always be keeping up to date
     when params[:increment_me]
       @item = Item.find(params[:increment_me])
       @cart.add_item(@item.id)
